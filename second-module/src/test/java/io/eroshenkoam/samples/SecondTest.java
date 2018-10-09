@@ -21,7 +21,7 @@ public class SecondTest {
 
     @Step
     public void secondStep() {
-
+        throw new NullPointerException();
     }
 
 
