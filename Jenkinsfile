@@ -16,13 +16,14 @@ pipeline {
         slackSend (color: '#FFFF00', message: "STARTED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
         //Build
         sh 'mvn clean test'
-	sh 'mvn allure:aggregate'      
+	
       }   
     }
     
-      stage('Unit Tests') {
+      stage('Generate Allure Reporting') {
       steps {
-            allure ([results: [[path:'first-module/target/allure-results']]  ])
+	
+	allure includeProperties: false, jdk: '', results: [[path: 'first-module/target/allure-results'], [path: 'second-module/target/allure-results']]   
  
       }
         
