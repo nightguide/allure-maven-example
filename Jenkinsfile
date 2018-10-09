@@ -16,7 +16,7 @@ pipeline {
         slackSend (color: '#FFFF00', message: "STARTED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
         //Build
         sh 'mvn clean test'
-	allure includeProperties: false, jdk: '', results: [[path: 'first-module/target/allure-results'], [path: 'second-module/target/allure-results']] 
+	
 	
       }   
     }
@@ -26,10 +26,12 @@ pipeline {
 post {
     success {
       slackSend (color: '#00FF00', message: "SUCCESSFUL: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
+      allure includeProperties: false, jdk: '', results: [[path: 'first-module/target/allure-results'], [path: 'second-module/target/allure-results']] 
     }
 
     failure {
       slackSend (color: '#FF0000', message: "FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
+      allure includeProperties: false, jdk: '', results: [[path: 'first-module/target/allure-results'], [path: 'second-module/target/allure-results']] 	
     }     
  }
 }
