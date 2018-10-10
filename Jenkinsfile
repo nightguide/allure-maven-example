@@ -27,14 +27,14 @@ post {
     success {
       slackSend (color: '#00FF00', message: "SUCCESSFUL: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
       allure includeProperties: false, jdk: '', results: [[path: 'first-module/target/allure-results'], [path: 'second-module/target/allure-results']] 
-      pangolinTestRail(configs: [[testRailProject: 'Test', failIfUploadFailed: false, format: 'junit', resultPattern: '**/first-module/target/surefire-reports/*.xml', testRun: 'Maven Example']])
+      pangolinTestRail( [testRailProject: 'project', configs: [[testRailProject: 'Test', failIfUploadFailed: false, format: 'junit', resultPattern: '**/first-module/target/surefire-reports/*.xml', testRun: 'Maven Example']],])
 
     }
 
     failure {
       slackSend (color: '#FF0000', message: "FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
       allure includeProperties: false, jdk: '', results: [[path: 'first-module/target/allure-results'], [path: 'second-module/target/allure-results']] 	
-     pangolinTestRail(configs: [[testRailProject: 'Test', failIfUploadFailed: false, format: 'junit', resultPattern: '**/first-module/target/surefire-reports/*.xml', testRun: 'Maven Example']])
+      pangolinTestRail( [testRailProject: 'project', configs: [[testRailProject: 'Test', failIfUploadFailed: false, format: 'junit', resultPattern: '**/first-module/target/surefire-reports/*.xml', testRun: 'Maven Example']],])
 
     }     
  }
