@@ -28,7 +28,8 @@ post {
       slackSend (color: '#00FF00', message: "SUCCESSFUL: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
       allure includeProperties: false, jdk: '', results: [[path: 'first-module/target/allure-results'], [path: 'second-module/target/allure-results']] 
       pangolinTestRail( [testRailProject: 'Test Project', configs: [[testPath: 'Master\\Section1\\Section2', failIfUploadFailed: false, format: 'junit', resultPattern: '**/first-module/target/surefire-reports/*.xml', testRun: 'Maven Example']],])
-
+      testRail(testrailProject: 'Test Project', testrailSuite: '', 
+         junitResultsGlob: 'second-module/target/allure-results', createNewTestcases: 'true'])
     }
 
     failure {
